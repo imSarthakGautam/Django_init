@@ -12,3 +12,5 @@ def about(request):
 def contact(request):
     #return HttpResponse("Hello world, You are at DjangoFirst Contact page")
      return render(request, 'website/contact.html')
+
+##Notes

@@ -1,6 +1,6 @@
 # Django_init
 
-This repository consists of everything basics you need to know about Django and revise it whenever necessay.
+This repository consists of everything basics you need to know about Django and revise it whenever necessary.
 
 ## What is Django ?
  - high level Python framework that encourages rapid development and clean design.
@@ -20,7 +20,7 @@ python -m venv .venv
 pip install uv
 ```
 
--creating a virtual environment with uv
+- creating a virtual environment with uv
 ```
 uv venv
 ```
@@ -29,6 +29,9 @@ uv venv
 ```
 .venv\Scripts\activate
 ```
+My personal error of prevention of running scripts.  
+`Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+`
 
 - **To install Django finally with uv**
 - to activate the virtual environment
@@ -55,3 +58,37 @@ uv pip install django
  ```
  - This will start the server at _http://localhost:8000_
 
+
+# File Structure
+
+Root Level:
+-manage.py
+-Filename_Projectfolder
+  -cache
+  -settings.py
+  -urls.py
+
+-db.Sqlite3
+
+
+User--(request to website)--Django---Url Resolver--urls.py--(may redirect to other urls)--views.py(main controller/logic here)--via or without model.py access db.
+-views may use templates.
+
+
+### creating an app
+ 
+```
+python manage.py startapp
+```
+
+After creating an app next we have to do is make the project aware of the app.
+
+inside `settings.py` add `appName` inside installed apps.
+form folder `template/newApp` inside the new App
+
+
+
+### Django app structure
+
+
+Jinja2- templating engine.
