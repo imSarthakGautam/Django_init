@@ -89,8 +89,9 @@ uv pip install django
  
 ### Basic Flow of Djnago
 
-User--(request to website)--Django---Url Resolver--urls.py--(may redirect to other urls)--views.py(main controller/logic here)--via or without model.py access db.
--views may use templates.
+`User`--(request to website)--`Django`---Url Resolver--`urls.py`--(may redirect to other urls)--`views.py`(main controller/logic here)--via or without model.py access db.
+
+views may use templates.
 
 
 ## creating an app
