@@ -37,8 +37,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #add new app of your project
     'newApp',
+    # add this for tailwind
+    'tailwind',
+    # new app name after tailwind start
+    'theme',
+
+    'django_browser_reload'
 ]
+
+TAILWIND_APP_NAME = 'theme'
+
+INTERNAL_IPS = ['127.0.0.1']
+#for windows user
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,6 +61,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    #at the end
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'DjangoFirst.urls'

@@ -1,3 +1,4 @@
+{% load static tailwind_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -11,11 +12,12 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
+     {% tailwind_css %}
 </head>
 <body>
     <nav>This is a navbar. </nav>
     <br>
-    <div>Here these are default blocks in layout</div>
+    <div class="bg-orange-500 text-3xl" >Here these are default blocks in layout. If you see orange background around it's via tailwind</div>
     <br>
     {% block content %}{% endblock %}
 </body>

@@ -26,4 +26,7 @@ urlpatterns = [
     path('contact/', views.contact , name='contact'),
     path('newApp/', include('newApp.urls')),
     #passing the control to newly formed App whenever you hit site/newApp
+
+    #this path does reload
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
