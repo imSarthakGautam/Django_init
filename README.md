@@ -71,6 +71,7 @@ uv pip install django
  Models are the "blueprints" for your database. They define the structure of your data, specifying the fields and types of data you want to store. Models are Python classes that Django converts into database tables.
 
  ## File Structure
+ ```
   myproject/
 │
 ├── myproject/
@@ -82,6 +83,7 @@ uv pip install django
 │
 ├── manage.py
 ├── db.sqlite3
+```
   
  
  
@@ -113,7 +115,7 @@ Then pass the control from original URL.py to subURL.
 
 
 ### Django app structure
-
+```
  myproject/
 │
 ├── myproject/
@@ -142,7 +144,7 @@ Then pass the control from original URL.py to subURL.
 │
 ├── manage.py
 ├── db.sqlite3
-  
+ ``` 
 
 
 Jinja2- templating engine.
