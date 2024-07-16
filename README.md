@@ -70,6 +70,8 @@ uv pip install django
  ## Model
  Models are the "blueprints" for your database. They define the structure of your data, specifying the fields and types of data you want to store. Models are Python classes that Django converts into database tables.
 
+ ## ORMs
+
  ## File Structure
  ```
   myproject/
@@ -293,10 +295,13 @@ from .models import modelName
 admin.site.register(modelName)
 ```
 
+# Reflection of DB in Frontend
 
-
-
-
-
-
-
+in views.py file 
+add new parameter in `return render ()` after extracting the value from DB in variable
+```
+def app_views(request):
+  dbData = user_Model.objects.all()
+  return render(request, 'newApp/myNewApp.html', {'dbData': dbData})
+```
+.all() gives arrays.
