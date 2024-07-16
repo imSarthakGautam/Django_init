@@ -5,7 +5,8 @@ from . import views
 # localhost:8000/newApp/about
 urlpatterns = [
   
-    path('', views.myNewApp, name='myApp'),
+    path('', views.myNewApp, name='newApp'),
+    path('<int:my_id>/', views.userDetails, name='userDetails'),
     #path('faq/', views.faq, name='faq'),
     
 ]

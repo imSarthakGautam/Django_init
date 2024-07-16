@@ -18,6 +18,7 @@ class userModel(models.Model):
 
     date_added = models.DateTimeField(default=timezone.now)
     sex=models.CharField(max_length=1, choices=GENDER)
+    description= models.TextField(default='')
 
     def __str__(self):
         # to name userModel by own name

@@ -1,13 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My newApp</title>
-</head>
-<body>
-    <h1>This is the initial state of application.</h1>
-    <h2>This the view to be rendered inside, formed in templates of newApp </h2>
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+New App page
+{% endblock %}
+
+{% block content %}
+<h1>This is the initial state of application.</h1>
+<h2>This the view to be rendered inside, formed in templates of newApp </h2>
+
+<div class="grid-cols-3 gap-4 m-4"></div>
+
+{% for db in dbData  %}
+<div class="bg-gray-600 rounded-sm p-5">
+    <img class="rounded shadow-lg" src="{{db.image.url}}" alt="">
+    <h3>{{db.name}}</h3>
+
+    <a href="{% url 'userDetails' db.id %}">
+        <button
+        type="button"
+        class=" w-[100%] focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">{{db.id}}-{{db.sex}}</button></a>
+</div>
+<div>if you see image this is extracted from database</div>
+{% endfor %}
+
+{% endblock %}
+   
