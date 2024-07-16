@@ -184,9 +184,9 @@ in settings.py:
 **installed_apps =[]** ma : _tailwind_ thapne
 also add :
 - **TAILWIND_APP_NAME:** _'newname'_
-- **INTERNAL IPS: ['']** 
-  i.e array and string inside and 
-- **NPM_BIN_PATH:** _r"C:\Program Files\nodejs\npm.cmd"_
+- **INTERNAL IPS: ['']**   
+i.e array and string inside and 
+- **NPM_BIN_PATH:** _r"C:\Program Files\nodejs\npm.cmd"_  
 to generate this `from where npm` in cmd : _r"path"_
 
 `python manage.py tailwind install`
@@ -225,4 +225,78 @@ INSTALLED_APPS = [
 _Now hot reloading is possible_.
 
 # Django Admin Panel
+
+in case you forget password :
+`python manage.py changepassword userName`
+
+# Django Models
+used to define the structure of database and relationship between different models.
+Model is a python class that represents table in db.  
+It contains fields that define structure of table and methods that define the behaviour of table.
+
+- Usually data related files/models are not created/handled in main project.
+i.e so inside the app.
+
+### Defining a model
+use models.py file in Django project
+```
+from django.db import models
+from django.utils import timezone
+
+# Creation of model
+
+class modelName(models.Model):
+
+  field1= models.
+  field2=
+  field3=
+```
+
+### Install Pillow library to use image field
+
+when you want to put images or use image field you have to do changes in settings.py of project.
+
+```
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+```
+
+then to reflect media files configure in main project's urls.py
+```
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    #...
+    #...
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+### Adding data to DB
+The django doesnt yet know we have added a new model so letting it know
+via migrations.
+To migrate the DB and add data to new `userModel` model.
+```
+python manage.py makemigrations chai
+python manage.py migrate
+```
+
+Now to add some data to DB.
+Admin.py sanga kunai pani model attach garera admin panel ma herna milxa
+For this goto admin.py and add following code to `userModel`
+```
+from django.contrib import admin
+...
+from .models import modelName
+
+admin.site.register(modelName)
+```
+
+
+
+
+
+
+
 
