@@ -173,6 +173,7 @@ These files and directories together form the backbone of your Django project, h
 
 ## Django App
  - modular components of a Django project that are designed to handle specific functionalities or features within the application. 
+
  - Each app is a self-contained package of code that can include models, views, templates, static files, and other components that work together to provide a particular functionality.
  
 ```
@@ -347,6 +348,42 @@ INSTALLED_APPS = [
 
 _Now hot reloading is possible_.
 
+# Rendering HTML in Django : Dev POV
+
+## Define and create templates
+Define HTML structures and relevant CSS or JS 
+and enclose it inside templates directory.
+_Say your HTMl document is **index.html**_
+
+## Create Views 
+- In django views handle both presentation and business logics.
+
+```
+from django.shortcuts import render
+
+def app_views(request):
+  return render(request, 'newApp/index.html', 
+```
+Here,
+1. **render** function that simplifies the process of generating an HTTP response with a rendered template is imported.
+
+2. **app_views(request)** defines view function, with parameter request, _which represents HTTP request of client_ 
+
+3.  Calling **render function**: it combines the request with a specified template and returns an HTTP response with the rendered template.
+The return value is _HTTPResponse_ object which will be sent back to client browser.
+
+## Map views in urls.py
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.app_views, name='index'),
+]
+
+```
+`include('myapp.urls')`: This includes the URL patterns defined in myapp/urls.py in the project’s URL configuration.
+
 # Django Admin Panel
 
 in case you forget password :
@@ -416,16 +453,25 @@ from .models import modelName
 admin.site.register(modelName)
 ```
 
-# Create Views : Reflection of DB in Frontend
+# Reflection of DB in Frontend i.e views 
 
 in views.py file 
 add new parameter in `return render ()` after extracting the value from DB in variable
 ```
+from django.shortcuts import render
+
 def app_views(request):
   dbData = user_Model.objects.all()
   return render(request, 'newApp/myNewApp.html', {'dbData': dbData})
 ```
-.all() gives arrays.
+Here,
+1. **render** function that simplifies the process of generating an HTTP response with a rendered template is imported.
+
+2. **app_views(request)** defines view function, with parameter request, _which represents HTTP request of client_ 
+
+3.  Calling **render function**: it combines the request with a specified template and returns an HTTP response with the rendered template.
+The return value is _HTTPResponse_ object which will be sent back to client browser.
 
 
-## Relationship Models
+
+# Relationship Models
