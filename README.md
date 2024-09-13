@@ -24,6 +24,36 @@ This repository consists of everything basics you need to know about Django and 
  ### ORMs
  Django ORM (Object-Relational Mapper) is a powerful feature of Django wherby it acts as a layer between the Django application and the database, that allows developers to interact with the database and manipulate data using Python code (objects and methods) instead of writing raw SQL queries.
  
+ ### Basic Flow of Djnago
+
+`User`--(request to website)--> `Django`---Url Resolver--`urls.py`--(may redirect to other urls)--`views.py`(main controller/logic here)--via or without model.py access db.
+
+
+
+1. **User Request to Website (`User` -- request to website)**:
+   - A user initiates a request by typing a URL in the browser or interacting with the website (e.g., clicking a link or submitting a form). This sends an HTTP request (like GET or POST) to the Django server.
+
+2. **Django Receives the Request (`Django`)**:
+   - Django's server (usually using `manage.py runserver` during development) receives the incoming request and starts processing it.
+
+3. **URL Resolver (`---URL Resolver---`)**:
+   - The URL Resolver is Django's component responsible for determining which view should handle the request based on the URL pattern. This step involves matching the request URL to patterns defined in `urls.py`.
+
+4. **URL Patterns (`urls.py`)**:
+   - `urls.py` is a configuration file where you define URL patterns and map them to specific views. Each pattern represents a route in your application. The URL Resolver checks these patterns to find the right view to call.
+   - **Redirection to Other URLs**: Sometimes, `urls.py` may include nested URL configurations or redirects, which means requests can be forwarded to other `urls.py` files or endpoints within the project.
+
+5. **Views (`views.py`)**:
+   - Once the correct view is determined, Django calls the corresponding function or class defined in `views.py`. The view contains the main business logic or controller code for handling the request.
+   - Views handle user input, interact with the database (if needed), perform calculations, and determine what data to send back to the user.
+   - views may use templates.
+
+
+6. **Access to Database via Models (`via or without model.py access db`)**:
+   - **Via Model Access**: Views often interact with models defined in `models.py` to perform CRUD operations (Create, Read, Update, Delete) on the database. Models define the structure of the data, and Django's ORM (Object-Relational Mapper) allows the view to fetch or manipulate this data using Python code.
+   - **Without Model Access**: Sometimes, views may not need to interact with the database directly. For example, a simple view that serves static content or redirects the user might not involve any database operations.
+
+
 # Django Setup:
 
 ## Environment setup
@@ -57,7 +87,9 @@ uv pip install django
 ```
 
 
-## Django Project
+## Django Project Setup
+
+### Django Project:
 
  - A Django project is a collection of settings and configurations that define the structure and behavior of a web application.
 
@@ -93,12 +125,6 @@ uv pip install django
   
  
  
-### Basic Flow of Djnago
-
-`User`--(request to website)--`Django`---Url Resolver--`urls.py`--(may redirect to other urls)--`views.py`(main controller/logic here)--via or without model.py access db.
-
-views may use templates.
-
 
 # Creating an Django app
 
