@@ -9,6 +9,23 @@ This repository consists of everything basics you need to know about Django and 
  - provides tools and libraries for building webapps
  - which includes built-in admin panel and ORM, templating engine.
 
+## Django Important Terminologies:
+
+ ### Views
+ Views in Django are like the "brain" of your application. They take in user requests, process them (often involving querying the database), and return a response. Views can return different types of responses, such as HTML, JSON, or even an error message.
+
+ ### Templates
+ Templates are HTML files with placeholders for dynamic content. They determine how the content will be displayed to the user. Django uses a templating engine that allows you to embed Django Template Language (DTL) to add logic like loops and conditionals.
+
+
+ ### Model
+ Models are the "blueprints" for your database. They define the structure of your data, specifying the fields and types of data you want to store. Models are Python classes that Django converts into database tables.
+
+ ### ORMs
+ Django ORM (Object-Relational Mapper) is a powerful feature of Django wherby it acts as a layer between the Django application and the database, that allows developers to interact with the database and manipulate data using Python code (objects and methods) instead of writing raw SQL queries.
+ 
+# Django Setup:
+
 ## Environment setup
 - creating a virtual environment **In Windows**.
 ```
@@ -40,7 +57,7 @@ uv pip install django
 ```
 
 
-# Django Project
+## Django Project
 
  - A Django project is a collection of settings and configurations that define the structure and behavior of a web application.
 
@@ -58,19 +75,6 @@ uv pip install django
  ```
  - This will start the server at _http://localhost:8000_
 
-# Django 
-
- ## Views
- Views in Django are like the "brain" of your application. They take in user requests, process them (often involving querying the database), and return a response. Views can return different types of responses, such as HTML, JSON, or even an error message.
-
- ## Templates
- Templates are HTML files with placeholders for dynamic content. They determine how the content will be displayed to the user. Django uses a templating engine that allows you to embed Django Template Language (DTL) to add logic like loops and conditionals.
-
-
- ## Model
- Models are the "blueprints" for your database. They define the structure of your data, specifying the fields and types of data you want to store. Models are Python classes that Django converts into database tables.
-
- ## ORMs
 
  ## File Structure
  ```
@@ -96,10 +100,14 @@ uv pip install django
 views may use templates.
 
 
-## creating an app
+# Creating an Django app
+
+## Django App
+ - modular components of a Django project that are designed to handle specific functionalities or features within the application. 
+ - Each app is a self-contained package of code that can include models, views, templates, static files, and other components that work together to provide a particular functionality.
  
 ```
-python manage.py startapp
+python manage.py startapp _appName
 ```
 
 After creating an app next we have to do is make the project aware of the app.
@@ -231,15 +239,15 @@ _Now hot reloading is possible_.
 in case you forget password :
 `python manage.py changepassword userName`
 
-# Django Models
-used to define the structure of database and relationship between different models.
+# Django Models and working with Django ORM
+Django Models are used to define the structure of database and relationship between different models.
 Model is a python class that represents table in db.  
 It contains fields that define structure of table and methods that define the behaviour of table.
 
 - Usually data related files/models are not created/handled in main project.
 i.e so inside the app.
 
-### Defining a model
+## Defining a model
 use models.py file in Django project
 ```
 from django.db import models
@@ -295,7 +303,7 @@ from .models import modelName
 admin.site.register(modelName)
 ```
 
-# Reflection of DB in Frontend
+# Create Views : Reflection of DB in Frontend
 
 in views.py file 
 add new parameter in `return render ()` after extracting the value from DB in variable
@@ -305,3 +313,6 @@ def app_views(request):
   return render(request, 'newApp/myNewApp.html', {'dbData': dbData})
 ```
 .all() gives arrays.
+
+
+## Relationship Models
