@@ -390,12 +390,17 @@ in case you forget password :
 `python manage.py changepassword userName`
 
 # Django Models and working with Django ORM
-Django Models are used to define the structure of database and relationship between different models.
-Model is a python class that represents table in db.  
-It contains fields that define structure of table and methods that define the behaviour of table.
+- Django Models are heart of Django application, used to define the structure of database and relationship between different models.
+- Model is a python class that represents table in db.  
+- It contains fields that define structure of table i.e. attributes and methods that define the behaviour of table.
 
 - Usually data related files/models are not created/handled in main project.
 i.e so inside the app.
+
+## Fields and Field options of Model:
+- They are attributes of model class that define column of db table
+- The various field types include `CharField, IntegerField, DataField, BooleanField`
+- Each filed takes certain set of field-specific arguments like `maxlength, null, blank, default, choices` which are known as field arguments. 
 
 ## Defining a model
 use models.py file in Django project
@@ -404,15 +409,15 @@ from django.db import models
 from django.utils import timezone
 
 # Creation of model
+class modelName_Book(models.Model):
 
-class modelName(models.Model):
-
-  field1= models.
-  field2=
-  field3=
+  field1_bname= models.CharField(max_length=200)
+  field2_author=models.CharField(max_length=100)
+  field3_dateofpub=models.DateField()
 ```
+- `.Model`: The base class that turns a Python class into a database table with fields as columns, enabling easy database operations.
 
-### Install Pillow library to use image field
+#### Note : Install Pillow library to use image field
 
 when you want to put images or use image field you have to do changes in settings.py of project.
 
@@ -433,16 +438,28 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ```
 
-### Adding data to DB
-The django doesnt yet know we have added a new model so letting it know
-via migrations.
-To migrate the DB and add data to new `userModel` model.
+## Adding data to DB : Database Migrations
+
+- The django doesnt yet know we have added a new model so letting it know
+via migrations i.e. keeping your database schema in sync with Django models.
+
+### How to migrate ?
+ To create or modify a model, you need to create a migration file which contains the instructions on how to alter the database schema to reflect the changes in your models.
+
+ - They are like Version control system, allowing _apply, rollback and manage changes_.
+
+ 1. Creating migrations file by using `makemigration` command.
+  _files like 0001-add.py_
 ```
 python manage.py makemigrations chai
+```
+
+2. Applying migrations by `migrate` command to modify necessary tables and fields.
+```
 python manage.py migrate
 ```
 
-Now to add some data to DB.
+- Now to add some data to DB.
 Admin.py sanga kunai pani model attach garera admin panel ma herna milxa
 For this goto admin.py and add following code to `userModel`
 ```
@@ -452,6 +469,100 @@ from .models import modelName
 
 admin.site.register(modelName)
 ```
+
+## CRUD opertions
+- CRUD stands for Create, Read, Update, and Delete. These are the four basic operations you can perform on data in a database.
+
+- Django's ORM provides an easy and intuitive way to perform these operations using model methods and querysets.
+### 1. Create
+- To create new instance of model i.e add new record.
+```
+new_book = Book.objects.create(bname="Django for Beginners", author="John Doe", dateofpub="2024-01-01")
+```
+
+### 2. Read
+- To retrieve data from DB, 
+- Methods : 
+- all(): Retrieves all records.
+- filter(): Retrieves records matching certain conditions.
+- get(): Retrieves a single record matching a condition
+
+```
+# Retrieve all books
+all_books = Book.objects.all()
+
+# Retrieve books published by "John Doe"
+john_books = Book.objects.filter(author="John Doe")
+
+# Retrieve a single book by its ID
+single_book = Book.objects.get(id=1)
+
+```
+
+### 3. Update
+```
+# Retrieve a book instance
+book_to_update = Book.objects.get(id=1)
+
+# Update fields
+book_to_update.title = "Advanced Django"
+book_to_update.save()
+
+```
+
+### 4. Delete
+```
+# Retrieve a book instance
+book_to_delete = Book.objects.get(id=1)
+
+# Delete the instance
+book_to_delete.delete()
+
+```
+
+## Model Relationships
+- Model relationships in Django define how different models (database tables) relate to each other. 
+- This includes relationships like one-to-one, one-to-many, and many-to-many.
+- It allows you to create complex data structures and maintain associations between different entities in application
+
+### One to One Relationship
+- To represent one to one relationship between 2 models.
+- Each record in one model is related to exactly one record in another model.
+- _Each author has only 1 profile in below eg_
+
+```
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    bio = models.TextField()
+
+class Profile(models.Model):
+    author = models.OneToOneField(Author, on_delete=models.CASCADE)
+    website = models.URLField()
+```
+
+### Many to One Relationship
+To represent a many-to-one relationship where multiple records in one model are associated with a single record in another model.
+
+```class Book(models.Model):
+    title = models.CharField(max_length=200)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+```
+- Here each book can be associated with one Author
+- The author field is used as ForeignKey pointed to Author model
+- `on_delete=models.CASCADE`: When an Author is deleted, all associated Book instances are also deleted.
+
+### Many to Many Relationship
+to Represent a many-to-many relationship where multiple records in one model can be related to multiple records in another model.
+
+```
+class Genre(models.Model):
+    name = models.CharField(max_length=100)
+
+class Book(models.Model):
+    title = models.CharField(max_length=200)
+    genres = models.ManyToManyField(Genre)
+```
+A Book can belong to multiple Genres, and a Genre can include multiple Books.
 
 # Reflection of DB in Frontend i.e views 
 
@@ -464,14 +575,5 @@ def app_views(request):
   dbData = user_Model.objects.all()
   return render(request, 'newApp/myNewApp.html', {'dbData': dbData})
 ```
-Here,
-1. **render** function that simplifies the process of generating an HTTP response with a rendered template is imported.
+In the template, you can access the dbData variable to display the data retrieved from the database.
 
-2. **app_views(request)** defines view function, with parameter request, _which represents HTTP request of client_ 
-
-3.  Calling **render function**: it combines the request with a specified template and returns an HTTP response with the rendered template.
-The return value is _HTTPResponse_ object which will be sent back to client browser.
-
-
-
-# Relationship Models
