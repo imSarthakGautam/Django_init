@@ -1,0 +1,19 @@
+ {% extends "layout.html" %}
+
+{% block content %}
+test content for forms
+<form method ="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Submit</button>
+</form>
+{% if players %}
+<h2>Players from the selected National Team:</h2>
+<ul>
+    {% for player in players %}
+        <li>{{ player.name }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock content %}

@@ -7,6 +7,7 @@ urlpatterns = [
   
     path('', views.myNewApp, name='newApp'),
     path('<int:my_id>/', views.userDetails, name='userDetails'),
+    path('player/', views.player, name='player'),
     #path('faq/', views.faq, name='faq'),
     
 ]
