@@ -17,6 +17,7 @@ This repository consists of everything basics you need to know about Django and 
 
  ### Templates
  Templates are HTML files with placeholders for dynamic content. They determine how the content will be displayed to the user. Django uses a templating engine that allows you to embed Django Template Language (DTL) to add logic like loops and conditionals.
+ _{{these are variables}}, these are templates {% %}_
 
 
  ### Model
@@ -414,6 +415,7 @@ class modelName_Book(models.Model):
   field1_bname= models.CharField(max_length=200)
   field2_author=models.CharField(max_length=100)
   field3_dateofpub=models.DateField()
+  feild4_imagepp= models.ImageField(upload_to='media/')
 ```
 - `.Model`: The base class that turns a Python class into a database table with fields as columns, enabling easy database operations.
 
@@ -577,3 +579,17 @@ def app_views(request):
 ```
 In the template, you can access the dbData variable to display the data retrieved from the database.
 
+# Django Forms
+- way to handle user input in structured way,
+- make it easy to create, validate, and process forms
+- **major uses** : automatic validation, protects against XSS, convinience to create forms based on Model fields (modelForm)
+- **Types of Forms:**
+1. Forms : basic, manually defined and specified
+2. ModelForms : automatically created from DjangoModels.
+
+## Basic Overview :
+- create `forms.py`
+- render form from HTML template
+- process : handle submission in view, check validity and save data
+
+**NOTE**: crsf token is used to prevent cross-site forgery.
