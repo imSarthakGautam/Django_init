@@ -21,11 +21,15 @@ def player(request):
         form = PlayerForm(request.POST)
      #valid form ?
         if form.is_valid():
-            #get the selected national team
+        # this part validates form, cleans datam and stores this cleaned data in dictionary form.Cleaned_data
+            
+
+            #get the selected national team, extracts the specific feild data from form
             nation_player=form.cleaned_data['national_team']
+
             #filter players based on selected national team
             playerss= Player.objects.filter(national_team=nation_player)
     else:
-        form=PlayerForm()
+        form=PlayerForm()#empty form
 
     return render(request, 'newApp/playerform.html', {'form':form,'players':playerss})
