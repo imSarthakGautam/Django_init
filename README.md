@@ -113,6 +113,7 @@ uv pip install django
  ```
  - This will start the server at _http://localhost:8000_
 
+### Then configure static and media files 
 
  ## File Structure
  ```
@@ -183,16 +184,20 @@ python manage.py startapp _appName
 
 After creating an app next we have to do is make the project aware of the app.
 
-Inside `settings.py` add `appName` inside installed apps.
+- Inside `settings.py` add `appName` inside installed apps.
+ ```
+  INSTALLED_APPS = [
+    .....
+    'appName',
+  ]
+  ```
 
-Form folder `template/newApp` inside the new App.
-
+- Form folder `template/newApp` inside the new App.
 1. Here write the html to be rendered,
 give its reference to views then.
 2. Copy urls from original projects url.py to `newApp`'s newly formed `url.py`
-
-This is URL.py refereing to subURL.py in Django
-Then pass the control from original URL.py to subURL.
+_This is URL.py refereing to subURL.py in Django_
+_Then pass the control from original URL.py to subURL_
 
 
 
