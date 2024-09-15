@@ -427,12 +427,18 @@ when you want to put images or use image field you have to do changes in setting
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ```
-
+For static files
+```
+STATIC_URL ='static/'
+STATICFILES_DIRS = [ os.path.join(BASE_DIR , 'static')]
+```
 then to reflect media files configure in main project's urls.py
 ```
 from django.conf import settings
 from django.conf.urls.static import static
+```
 
+```
 urlpatterns = [
     path('admin/', admin.site.urls),
     #...
