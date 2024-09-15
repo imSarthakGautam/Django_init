@@ -388,7 +388,15 @@ urlpatterns = [
 ]
 
 ```
-`include('myapp.urls')`: This includes the URL patterns defined in myapp/urls.py in the project’s URL configuration.
+To include URL patterns defined in myapp/urls.py in the project’s URL configuration.`include('tweet.urls')),`
+```
+from django.urls import path,include #---include import too
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('tweet/', include('tweet.urls')),
+] 
+```
 
 # Django Admin Panel
 
