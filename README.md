@@ -31,6 +31,7 @@ This repository consists of everything basics you need to know about Django and 
  It's primary purpose is to separate the presentation layer (UI) from the business logic in your Django applications.
  
  ### Basic Flow of Djnago
+ ![Django_Workings](./DjangoWorking.png)
 
 `User`--(request to website)--> `Django`---Url Resolver--`urls.py`--(may redirect to other urls)--`views.py`(main controller/logic here)--via or without model.py access db.
 
